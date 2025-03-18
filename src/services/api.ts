@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:3001";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 export async function fetchProducts() {
   const res = await fetch(`${API_URL}/products`);
   return res.json();

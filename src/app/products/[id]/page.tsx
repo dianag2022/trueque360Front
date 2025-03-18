@@ -6,9 +6,16 @@ import { getUser } from "@/services/auth";
 import Image from "next/image";
 import { fetchProductById } from "@/services/api";
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+}
+
 export default function ProductDetail() {
-  const { id  } = useParams(); // Ahora extraemos `id` correctamente
-  const [product, setProduct] = useState<any>(null);
+  const { id } = useParams() as { id: string }; 
+  const [product, setProduct] = useState<Product | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -24,7 +31,7 @@ export default function ProductDetail() {
   const handleContact = async () => {
     try{
         const user = await getUser();
-        alert("Abrir chat con el vendedor");
+        alert(`${user} Abrir chat con el vendedor`);
     }catch(error){
       console.error(error);
         router.push("/login");
@@ -47,7 +54,6 @@ export default function ProductDetail() {
       />
       <h1 className="text-2xl font-bold mt-4">{product.name}</h1>
       <p className="text-xl text-gray-700">${product.price}</p>
-      <p className="mt-2 text-gray-600">{product.description}</p>
       <button onClick={handleContact} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg">Contactar</button>
     </div>
   );
