@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { signIn } from "@/services/auth";
 
 export default function Login() {
@@ -45,6 +46,13 @@ export default function Login() {
           Iniciar sesión
         </button>
       </form>
+
+      {/* ✅ Enlace a Recuperar Contraseña */}
+      <div className="mt-4 text-center">
+        <Link href="/forgot-password" className="text-blue-600 hover:underline">
+          ¿Olvidaste tu contraseña?
+        </Link>
+      </div>
     </div>
   );
 }

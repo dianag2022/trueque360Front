@@ -17,6 +17,12 @@ export default function Navbar() {
           <Link href="/chat" className="hover:underline">
             Chat
           </Link>
+          <Link href="/login" className="hover:underline">
+            Iniciar Sesión
+          </Link>
+          <Link href="/signup" className="hover:underline">
+            Registrarme
+          </Link>
         </div>
       </div>
     </nav>
