@@ -1,8 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function ResetPassword() {
+function ResetPasswordForm() {
   const searchParams = useSearchParams();
   const token = searchParams.get("access_token");
   const [password, setPassword] = useState("");
@@ -18,11 +19,15 @@ export default function ResetPassword() {
         body: JSON.stringify({ token, newPassword: password }),
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
+      const data: { message?: string } = await res.json();
+      if (!res.ok) throw new Error(data.message || "Error updating password");
       setMessage("Contraseña actualizada correctamente");
-    } catch (err: any) {
-      setMessage(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        setMessage(err.message);
+      } else {
+        setMessage("Unknown error");
+      }
     }
   };
 
@@ -44,5 +49,13 @@ export default function ResetPassword() {
       </form>
       {message && <p className="mt-4 text-green-500">{message}</p>}
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
   );
 }

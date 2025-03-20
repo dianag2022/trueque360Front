@@ -22,8 +22,12 @@ export default function ForgotPassword() {
 
       setMessage("Correo de recuperación enviado. Revisa tu bandeja de entrada.");
       setError("");
-    } catch (err: any) {
-      setError(err.message);
+    }  catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Unknown error");
+      }
       setMessage("");
     }
   };
