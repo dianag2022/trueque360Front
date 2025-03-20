@@ -1,3 +1,5 @@
+import Productos from "./products/page";
+
 export default function Home() {
   return (
     <div className="text-center py-10">
@@ -5,6 +7,9 @@ export default function Home() {
       <p className="text-gray-700 mt-2">
         Encuentra productos de segunda mano y conéctate con vendedores.
       </p>
+
+
+      <Productos />
     </div>
   );
 }
