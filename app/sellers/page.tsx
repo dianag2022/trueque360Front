@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Search, Star, MapPin } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Seller {
   id: string;
@@ -89,11 +90,12 @@ export default function SellersPage() {
             <Link key={seller.id} href={`/sellers/${seller.id}`}>
               <Card className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="flex gap-4 p-6">
-                  <div className="relative h-24 w-24 flex-shrink-0">
-                    <img
+                  <div className="relative w-24 h-24">
+                    <Image
                       src={seller.image}
                       alt={seller.name}
-                      className="rounded-full w-full h-full object-cover"
+                      fill
+                      className="object-cover rounded-full"
                     />
                   </div>
                   <div className="flex-1 space-y-2">

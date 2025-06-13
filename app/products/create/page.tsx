@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Upload, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface FormData {
   name: string;
@@ -203,9 +204,11 @@ export default function CreateProductPage() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                   {previews.map((preview, index) => (
                     <div key={index} className="relative group">
-                      <img
+                      <Image
                         src={preview}
                         alt={`Preview ${index + 1}`}
+                        width={128}
+                        height={128}
                         className="w-full h-32 object-cover rounded-lg"
                       />
                       <button

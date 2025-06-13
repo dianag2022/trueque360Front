@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types";
@@ -10,6 +10,7 @@ import ProductCard from "@/components/ui/product-card";
 
 export default function ProductDetail() {
   const params = useParams();
+  const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -59,9 +60,14 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800">Product not found</h1>
-          <p className="text-gray-600 mt-2">The product you're looking for doesn't exist.</p>
+        <div className="text-center py-8">
+          <h2 className="text-2xl font-bold mb-4">No se encontró el producto</h2>
+          <p className="text-muted-foreground mb-4">
+            Lo sentimos, no pudimos encontrar el producto que estás buscando.
+          </p>
+          <Button onClick={() => router.push("/products")}>
+            Volver a Productos
+          </Button>
         </div>
       </div>
     );

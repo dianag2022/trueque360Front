@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/client";
@@ -167,11 +168,14 @@ export default function SellerDashboardPage() {
                 className="flex items-center justify-between p-4 border rounded-lg"
               >
                 <div className="flex items-center space-x-4">
-                  <img
-                    src={service.image}
-                    alt={service.name}
-                    className="w-16 h-16 object-cover rounded"
-                  />
+                  <div className="relative w-16 h-16">
+                    <Image
+                      src={service.image}
+                      alt={service.name}
+                      fill
+                      className="object-cover rounded"
+                    />
+                  </div>
                   <div>
                     <h3 className="font-medium">{service.name}</h3>
                     <p className="text-sm text-muted-foreground">
